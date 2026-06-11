@@ -532,3 +532,13 @@ font-size:3rem;
 }
 
 }
+body{
+    background:
+    radial-gradient(circle at top left,#ff4f9340,transparent 30%),
+    radial-gradient(circle at top right,#ffd70030,transparent 30%),
+    radial-gradient(circle at bottom left,#ff8dbd30,transparent 30%),
+    linear-gradient(135deg,#050505,#111,#000);
+
+    color:white;
+    overflow-x:hidden;
+}
