@@ -1,141 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Dr. Spoorthi ❤️</title>
 
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<title>Happy Birthday Dr. Spoorthi ❤️</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
 </head>
 
 <body>
 
-    <!-- Floating Hearts -->
-    <div id="hearts-container"></div>
+<!-- LOADER -->
 
-    <!-- Hero Section -->
-    <section class="hero">
+<div id="loader">
 
-        <div class="hero-content">
+    <div class="loader-content">
 
-            <h1 class="title">
-                Happy Birthday
-            </h1>
+        <h1>Dr. Spoorthi ❤️</h1>
 
-            <h2 class="name">
-                Dr. Spoorthi ❤️
-            </h2>
+        <p>Preparing Something Special...</p>
 
-            <p class="subtitle">
-                You are the most beautiful chapter of my life ✨
-            </p>
+    </div>
 
-            <button class="btn" onclick="showSurprise()">
-                Open Your Surprise 🎁
-            </button>
+</div>
 
-        </div>
+<!-- VIDEO BACKGROUND -->
 
-    </section>
+<video autoplay muted loop id="bg-video">
 
-    <!-- Surprise Section -->
-    <section id="surprise-section" class="hidden">
+    <source src="background.mp4" type="video/mp4">
 
-        <div class="card">
+</video>
 
-            <h2>My Princess ❤️</h2>
+<div class="video-overlay"></div>
 
-            <p>
-                Happy Birthday to the most special person in my life.
-                Every moment with you is precious and unforgettable.
-                May your life be filled with happiness, success,
-                love, laughter and beautiful memories.
-            </p>
+<!-- FLOATING PARTICLES -->
 
-            <div class="gift-box" onclick="openGift()">
+<div id="particles"></div>
 
-                <div class="gift-lid"></div>
+<!-- HERO SECTION -->
 
-                <div class="gift-body"></div>
+<section class="hero">
 
-            </div>
+    <div class="hero-content">
 
-            <div id="gift-content" class="hidden">
+        <span class="tag">
+            ✨ Happy Birthday ✨
+        </span>
 
-                <h3>Your Gifts 🎁</h3>
-
-                <div class="gift-items">
-
-                    <span>💎 Earrings</span>
-                    <span>✨ Bracelet</span>
-                    <span>🌹 Roses</span>
-                    <span>🎂 Birthday Cake</span>
-                    <span>❤️ Endless Love</span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- Love Letter -->
-    <section class="letter-section">
-
-        <div class="letter-card">
-
-            <h2>💌 A Letter For You</h2>
-
-            <p id="typewriter"></p>
-
-        </div>
-
-    </section>
-
-    <!-- Gallery -->
-    <section class="gallery">
-
-        <h2>Beautiful Memories 📸</h2>
-
-        <div class="gallery-grid">
-
-            <div class="photo">Photo 1</div>
-            <div class="photo">Photo 2</div>
-            <div class="photo">Photo 3</div>
-            <div class="photo">Photo 4</div>
-
-        </div>
-
-    </section>
-
-    <!-- Final Message -->
-    <section class="final-section">
-
-        <h2>
-            You Are My Greatest Gift ❤️
-        </h2>
+        <h1>
+            Dr. Spoorthi ❤️
+        </h1>
 
         <p>
-            Happy Birthday Dr. Spoorthi ❤️
-            <br>
-            Forever & Always
+            You Are The Most Beautiful Chapter Of My Life
         </p>
 
-    </section>
+        <button class="hero-btn"
+        onclick="openJourney()">
 
-    <!-- Music -->
-    <audio id="music" loop>
-        <source src="music.mp3" type="audio/mpeg">
-    </audio>
+            Begin Your Surprise
 
-    <button id="musicBtn" onclick="toggleMusic()">
-        🎵 Play Music
+        </button>
+
+    </div>
+
+</section>
+
+<!-- LOVE LETTER -->
+
+<section id="journey" class="section">
+
+    <div class="glass-card">
+
+        <h2>💌 A Letter For You</h2>
+
+        <div id="typewriter"></div>
+
+    </div>
+
+</section>
+
+<!-- GALLERY -->
+
+<section class="section">
+
+    <h2 class="section-title">
+
+        Beautiful Memories 📸
+
+    </h2>
+
+    <div class="gallery">
+
+        <div class="gallery-item">
+
+            <img src="photo1.jpg">
+
+        </div>
+
+        <div class="gallery-item">
+
+            <img src="photo2.jpg">
+
+        </div>
+
+        <div class="gallery-item">
+
+            <img src="photo3.jpg">
+
+        </div>
+
+        <div class="gallery-item">
+
+            <img src="photo4.jpg">
+
+        </div>
+
+        <div class="gallery-item">
+
+            <img src="photo5.jpg">
+
+        </div>
+
+        <div class="gallery-item">
+
+            <img src="photo6.jpg">
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- GIFT BOX -->
+
+<section class="section">
+
+    <h2 class="section-title">
+
+        Special Birthday Gift 🎁
+
+    </h2>
+
+    <div class="gift-container">
+
+        <div class="gift-box"
+        onclick="openGift()">
+
+            <div class="gift-top"></div>
+
+            <div class="gift-body"></div>
+
+        </div>
+
+    </div>
+
+    <div id="gift-content">
+
+        <h2>Your Surprise ❤️</h2>
+
+        <div class="gift-grid">
+
+            <div class="gift-card">💎 Earrings</div>
+
+            <div class="gift-card">🌹 Roses</div>
+
+            <div class="gift-card">✨ Bracelet</div>
+
+            <div class="gift-card">🎂 Cake</div>
+
+            <div class="gift-card">🎁 Special Gifts</div>
+
+            <div class="gift-card">❤️ Endless Love</div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- 100 REASONS -->
+
+<section class="section">
+
+    <h2 class="section-title">
+
+        Why I Love You ❤️
+
+    </h2>
+
+    <div class="reasons">
+
+        <div class="reason">
+            Your Beautiful Smile 😊
+        </div>
+
+        <div class="reason">
+            Your Caring Nature ❤️
+        </div>
+
+        <div class="reason">
+            Your Kind Heart 🌹
+        </div>
+
+        <div class="reason">
+            Your Intelligence ✨
+        </div>
+
+        <div class="reason">
+            Your Support 🤗
+        </div>
+
+        <div class="reason">
+            Everything About You ❤️
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FINAL SECTION -->
+
+<section class="final-section">
+
+    <h1>
+
+        Happy Birthday
+
+        <br>
+
+        Dr. Spoorthi ❤️
+
+    </h1>
+
+    <p>
+
+        You Are My Greatest Gift
+
+    </p>
+
+    <button onclick="launchCelebration()">
+
+        Celebrate 🎉
+
     </button>
 
-    <script src="script.js"></script>
+</section>
+
+<!-- MUSIC -->
+
+<audio id="music" loop>
+
+    <source src="music.mp3"
+    type="audio/mp3">
+
+</audio>
+
+<button id="music-btn">
+
+    <i class="fa-solid fa-music"></i>
+
+</button>
+
+<!-- LIGHTBOX -->
+
+<div id="lightbox">
+
+    <span id="close-lightbox">
+        ×
+    </span>
+
+    <img id="lightbox-img">
+
+</div>
+
+<!-- FIREWORKS -->
+
+<canvas id="fireworks"></canvas>
+
+<script src="script.js"></script>
 
 </body>
 </html>
