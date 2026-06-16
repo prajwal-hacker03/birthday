@@ -3,92 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Dr. Spoorthi 🌿</title>
+    <title>Spoorthi | A Celebration</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Canvas Confetti -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Manrope:wght@200;400&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body>
 
-    <!-- Loading Screen -->
-    <div id="loader" class="loader-container">
-        <div class="leaf-spinner"></div>
-        <p>Growing something beautiful...</p>
-    </div>
+    <div class="noise"></div>
 
-    <!-- Background Elements -->
-    <div class="magic-forest">
-        <div class="fireflies" id="fireflies"></div>
-        <div class="floating-petals" id="petals"></div>
-    </div>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
 
-    <main id="app">
-        <!-- PHASE 1: Welcome -->
-        <section id="phase1" class="phase active">
-            <div class="glass-card">
-                <h1 class="typewriter">Welcome, Dr. Spoorthi💚</h1>
-                <p class="quote">"Some friendships bloom like the most beautiful flowers in nature."</p>
-                <button class="btn-premium" onclick="goToPhase2()">Open Your Gift 🎁</button>
-            </div>
-        </section>
+    <div class="orb orb-1 floating"></div>
+    <div class="orb orb-2 floating"></div>
+    <div class="orb orb-3 floating"></div>
 
-        <!-- PHASE 2: The Gift -->
-        <section id="phase2" class="phase">
-            <div class="gift-container" id="giftBox" onclick="openGift()">
-                <div class="gift-lid"></div>
-                <div class="gift-box-main"></div>
-            </div>
-            
-            <div id="giftContent" class="hidden">
-                <div class="glass-card">
-                    <h2 class="gold-text">A Special Surprise</h2>
-                    <p class="message">You are one of the most wonderful people in my life. May your smile always shine brighter than the stars and may every dream you have blossom beautifully like nature itself.</p>
-                    
-                    <div class="gallery">
-                        <div class="photo-slot">Nature</div>
-                        <div class="photo-slot">Memories</div>
-                        <div class="photo-slot">Joy</div>
-                    </div>
+    <main id="smooth-wrapper">
+        <div id="smooth-content">
 
-                    <button class="btn-premium" onclick="goToPhase3()">Continue to Celebration 🎉</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- PHASE 3: The Cake -->
-        <section id="phase3" class="phase">
-            <div class="cake-container">
-                <div class="cake">
-                    <div class="plate"></div>
-                    <div class="layer layer-bottom"></div>
-                    <div class="layer layer-middle"></div>
-                    <div class="layer layer-top"></div>
-                    <div class="icing"></div>
-                    <div class="drips"></div>
-                    <div class="candle" id="candle" onclick="blowCandle()">
-                        <div class="flame"></div>
+            <section id="phase1" class="viewport-section active">
+                <div class="content-wrapper">
+                    <p class="subtitle fade-up">01 — The Beginning</p>
+                    <h1 class="title fade-up">Dr. Spoorthi</h1>
+                    <p class="quote fade-up">"Some friendships bloom like the rarest flora, defying gravity and time."</p>
+                    <div class="magnetic-wrap fade-up">
+                        <button class="magnetic-btn" onclick="transitionToPhase(2)">
+                            <span>Open Gift</span>
+                        </button>
                     </div>
                 </div>
-            </div>
-            
-            <div id="finalMessage" class="hidden">
-                <h1 class="hb-text">Happy Birthday ❤️</h1>
-                <div class="glass-card">
-                    <p>Thank you for being such a special part of my life. May this year bring you happiness, peace, success, and countless beautiful memories.</p>
+            </section>
+
+            <section id="phase2" class="viewport-section hidden">
+                <div class="content-wrapper">
+                    <p class="subtitle">02 — The Essence</p>
+                    <div class="glass-monolith floating-slow">
+                        <h2 class="cinematic-text">You are extraordinary.</h2>
+                        <p class="message-text">May your smile outshine the stars, and your dreams blossom with the wild, untamed beauty of nature itself.</p>
+                        <div class="magnetic-wrap mt-2">
+                            <button class="magnetic-btn" onclick="transitionToPhase(3)">
+                                <span>Celebrate</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+
+            <section id="phase3" class="viewport-section hidden">
+                <div class="content-wrapper">
+                    <p class="subtitle">03 — The Wish</p>
+                    <div class="minimal-cake floating">
+                        <div class="flame" onclick="blowOut()"></div>
+                        <div class="candle-stick"></div>
+                        <div class="cake-base"></div>
+                    </div>
+                    <h1 id="finale-text" class="title hidden-text">Happy Birthday.</h1>
+                </div>
+            </section>
+
+        </div>
     </main>
-
-    <!-- Audio Control -->
-    <div class="audio-control" onclick="toggleMusic()">
-        <span id="musicIcon">🔇</span>
-        <audio id="bgMusic" loop>
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-        </audio>
-    </div>
 
     <script src="script.js"></script>
 </body>
