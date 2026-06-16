@@ -1,97 +1,127 @@
-// Initialization
-document.addEventListener('DOMContentLoaded', () => {
-    createFireflies();
-    setTimeout(() => {
-        document.getElementById('loader').style.opacity = '0';
-        setTimeout(() => document.getElementById('loader').remove(), 1000);
-    }, 2000);
+// --- 1. Custom Cursor Logic ---
+const cursor = document.querySelector('.cursor');
+const follower = document.querySelector('.cursor-follower');
+let mouseX = 0, mouseY = 0, posX = 0, posY = 0;
+
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    
+    // Snappy dot cursor
+    gsap.to(cursor, { x: mouseX, y: mouseY, duration: 0.1 });
 });
 
-// Fireflies Effect
-function createFireflies() {
-    const container = document.getElementById('fireflies');
-    for (let i = 0; i < 30; i++) {
-        const firefly = document.createElement('div');
-        firefly.className = 'firefly';
-        firefly.style.left = Math.random() * 100 + 'vw';
-        firefly.style.top = Math.random() * 100 + 'vh';
-        firefly.style.animationDuration = (Math.random() * 10 + 5) + 's';
-        firefly.style.opacity = Math.random();
-        container.appendChild(firefly);
-    }
-}
+// Smooth lagging follower ring
+gsap.ticker.add(() => {
+    posX += (mouseX - posX) / 9;
+    posY += (mouseY - posY) / 9;
+    gsap.set(follower, { x: posX, y: posY });
+});
 
-// Navigation Logic
-function goToPhase2() {
-    document.getElementById('phase1').classList.remove('active');
-    document.getElementById('phase2').classList.add('active');
-}
+// Cursor hover effects on interactive elements
+const interactives = document.querySelectorAll('button, .flame');
+interactives.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+        gsap.to(follower, { width: 80, height: 80, background: 'rgba(255,255,255,0.1)', duration: 0.3 });
+    });
+    el.addEventListener('mouseleave', () => {
+        gsap.to(follower, { width: 40, height: 40, background: 'transparent', duration: 0.3 });
+    });
+});
 
-function openGift() {
-    const giftBox = document.getElementById('giftBox');
-    giftBox.classList.add('gift-opened');
-    
-    // Magical Sparkles
-    confetti({
-        particleCount: 150,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#d4af37', '#87ceeb', '#e6e6fa']
+// --- 2. Magnetic Button Logic ---
+const magneticBtns = document.querySelectorAll('.magnetic-btn');
+
+magneticBtns.forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        // Pull the button towards the mouse
+        gsap.to(btn, { x: x * 0.4, y: y * 0.4, duration: 0.6, ease: "power2.out" });
+        gsap.to(btn.querySelector('span'), { x: x * 0.2, y: y * 0.2, duration: 0.6, ease: "power2.out" });
     });
 
-    setTimeout(() => {
-        giftBox.classList.add('hidden');
-        document.getElementById('giftContent').classList.remove('hidden');
-        document.getElementById('giftContent').classList.add('fadeInUp');
-    }, 800);
+    btn.addEventListener('mouseleave', () => {
+        // Snap back to center
+        gsap.to(btn, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
+        gsap.to(btn.querySelector('span'), { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
+    });
+});
+
+// --- 3. Antigravity Floating Elements ---
+function initAntigravity() {
+    const floatingElements = document.querySelectorAll('.floating');
+    const slowFloatingElements = document.querySelectorAll('.floating-slow');
+
+    floatingElements.forEach(el => {
+        gsap.to(el, {
+            y: "random(-30, 30)",
+            x: "random(-30, 30)",
+            rotation: "random(-15, 15)",
+            duration: "random(4, 8)",
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut"
+        });
+    });
+
+    slowFloatingElements.forEach(el => {
+        gsap.to(el, {
+            y: "-=15",
+            duration: 6,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut"
+        });
+    });
 }
 
-function goToPhase3() {
-    document.getElementById('phase2').classList.remove('active');
-    document.getElementById('phase3').classList.add('active');
-}
-
-function blowCandle() {
-    const flame = document.querySelector('.flame');
-    flame.style.display = 'none';
+// --- 4. Initialization & Phase Transitions ---
+window.onload = () => {
+    initAntigravity();
     
-    // Big Celebration
-    const duration = 5 * 1000;
-    const end = Date.now() + duration;
+    // Initial entrance animation
+    gsap.set('#phase1', { autoAlpha: 1 });
+    gsap.fromTo('.fade-up', 
+        { y: 50, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 1.5, stagger: 0.2, ease: "power3.out", delay: 0.5 }
+    );
+};
 
-    (function frame() {
-        confetti({
-            particleCount: 3,
-            angle: 60,
-            spread: 55,
-            origin: { x: 0 },
-            colors: ['#228B22', '#d4af37']
-        });
-        confetti({
-            particleCount: 3,
-            angle: 120,
-            spread: 55,
-            origin: { x: 1 },
-            colors: ['#228B22', '#d4af37']
-        });
+function transitionToPhase(phaseNumber) {
+    const currentPhase = document.querySelector('.viewport-section.active');
+    const nextPhase = document.getElementById(`phase${phaseNumber}`);
 
-        if (Date.now() < end) {
-            requestAnimationFrame(frame);
-        }
-    }());
+    // Cinematic Crossfade with scale down/up
+    const tl = gsap.timeline();
 
-    document.getElementById('finalMessage').classList.remove('hidden');
+    tl.to(currentPhase.querySelectorAll('.content-wrapper > *'), {
+        y: -50,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power2.in"
+    })
+    .set(currentPhase, { autoAlpha: 0, className: "viewport-section hidden" })
+    .set(nextPhase, { className: "viewport-section active" })
+    .fromTo(nextPhase, { autoAlpha: 0, scale: 0.95 }, { autoAlpha: 1, scale: 1, duration: 1.2, ease: "power2.out" })
+    .fromTo(nextPhase.querySelectorAll('.content-wrapper > *'), 
+        { y: 50, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 1.2, stagger: 0.2, ease: "power3.out" }, 
+        "-=0.8"
+    );
 }
 
-// Audio Toggle
-function toggleMusic() {
-    const music = document.getElementById('bgMusic');
-    const icon = document.getElementById('musicIcon');
-    if (music.paused) {
-        music.play();
-        icon.innerText = '🔊';
-    } else {
-        music.pause();
-        icon.innerText = '🔇';
-    }
+// --- 5. Finale Interaction ---
+function blowOut() {
+    const tl = gsap.timeline();
+    
+    // Kill the flame
+    tl.to('.flame', { scale: 0, opacity: 0, duration: 0.3, ease: "power1.in" })
+      // Ambient light goes dark
+      .to('.orb', { opacity: 0, duration: 2, ease: "power2.inOut" }, "-=0.3")
+      // Reveal the massive text
+      .to('#finale-text', { y: 0, opacity: 1, duration: 2, ease: "power3.out" });
 }
