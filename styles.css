@@ -1,170 +1,182 @@
 :root {
-    --forest-green: #1a3c34;
-    --lavender: #e6e6fa;
-    --sky-blue: #87ceeb;
-    --gold: #d4af37;
-    --glass: rgba(255, 255, 255, 0.1);
+    --bg-dark: #070908;
+    --text-main: #f0f4f1;
+    --accent-green: #2a4736;
+    --glow: rgba(144, 238, 144, 0.15);
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    cursor: none; /* Hide default cursor for custom one */
 }
 
 body {
-    background: radial-gradient(circle at center, #2d5a4c 0%, #0a1f1a 100%);
-    font-family: 'Inter', sans-serif;
-    color: white;
-    overflow: hidden;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Manrope', sans-serif;
+    overflow: hidden; /* Prevent native scroll, control via JS */
     height: 100vh;
 }
 
-h1, h2, .quote {
-    font-family: 'Playfair Display', serif;
+/* Typography */
+h1, h2, .cinematic-text {
+    font-family: 'Cinzel', serif;
+    font-weight: 400;
 }
 
-/* Background Magic */
-.magic-forest {
+.title {
+    font-size: clamp(4rem, 8vw, 10rem);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 2rem;
+    color: #ffffff;
+}
+
+.subtitle {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #888;
+    margin-bottom: 2rem;
+}
+
+.quote {
+    font-size: 1.2rem;
+    max-width: 500px;
+    opacity: 0.7;
+    margin-bottom: 4rem;
+}
+
+/* Cinematic Grain */
+.noise {
     position: fixed;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.04;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png');
+    animation: grain 8s steps(10) infinite;
+}
+
+@keyframes grain {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-5%, -10%); }
+    30% { transform: translate(3%, -15%); }
+    50% { transform: translate(12%, 9%); }
+    70% { transform: translate(9%, 4%); }
+    90% { transform: translate(-1%, 7%); }
+}
+
+/* Custom Cursor */
+.cursor {
+    width: 8px; height: 8px;
+    background: white;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+}
+
+.cursor-follower {
+    width: 40px; height: 40px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, background 0.3s;
+}
+
+/* Ambient Orbs (Antigravity elements) */
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
     z-index: -1;
 }
+.orb-1 { width: 400px; height: 400px; background: var(--accent-green); top: -10%; left: -10%; opacity: 0.4; }
+.orb-2 { width: 300px; height: 300px; background: #1a2c3a; bottom: 10%; right: 10%; opacity: 0.5; }
+.orb-3 { width: 200px; height: 200px; background: #3a2c1a; top: 40%; left: 50%; opacity: 0.3; }
 
-.firefly {
+/* Layout & Sections */
+.viewport-section {
     position: absolute;
-    width: 4px;
-    height: 4px;
-    background: #fdfd96;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #fdfd96;
-    animation: drift linear infinite;
-}
-
-/* Glassmorphism Card */
-.glass-card {
-    background: var(--glass);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 3rem;
-    border-radius: 24px;
-    text-align: center;
-    max-width: 600px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    animation: fadeInUp 1.2s ease;
-}
-
-/* Buttons */
-.btn-premium {
-    margin-top: 2rem;
-    padding: 1rem 2.5rem;
-    background: linear-gradient(45deg, var(--gold), #f3e5ab);
-    border: none;
-    border-radius: 50px;
-    color: #1a3c34;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.btn-premium:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.4);
-}
-
-/* Gift Box 3D */
-.gift-container {
-    width: 150px;
-    height: 150px;
-    position: relative;
-    cursor: pointer;
-    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.gift-container:hover { transform: scale(1.1); }
-
-.gift-box-main {
-    width: 100%;
-    height: 100%;
-    background: #d4af37;
-    position: relative;
-    border-radius: 8px;
-}
-
-.gift-lid {
-    width: 110%;
-    height: 30px;
-    background: #f3e5ab;
-    position: absolute;
-    top: -10px;
-    left: -5%;
-    z-index: 2;
-    border-radius: 4px;
-    transition: transform 0.8s ease;
-}
-
-.gift-opened .gift-lid { transform: translateY(-100px) rotate(-20deg); opacity: 0; }
-
-/* Phases */
-.phase {
-    display: none;
-    height: 100vh;
-    width: 100%;
-    justify-content: center;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    display: flex;
     align-items: center;
-    flex-direction: column;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
 }
 
-.active { display: flex; }
-
-.hidden { display: none; }
-
-/* Animations */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+.viewport-section.active {
+    visibility: visible;
+    opacity: 1;
 }
 
-/* Loading Screen */
-.loader-container {
-    position: fixed;
-    inset: 0;
-    background: var(--forest-green);
+.content-wrapper {
+    text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    z-index: 1000;
-    transition: opacity 1s ease;
 }
 
-.leaf-spinner {
-    width: 50px;
-    height: 50px;
-    border: 3px solid var(--gold);
-    border-radius: 50% 0 50% 0;
-    animation: rotate 2s linear infinite;
+/* Glass Monolith (Phase 2) */
+.glass-monolith {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    padding: 5rem 4rem;
+    border-radius: 2px; /* Brutalist/Premium hard edges */
+    max-width: 700px;
 }
 
-@keyframes rotate { to { transform: rotate(360deg); } }
+.message-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    opacity: 0.8;
+    margin-top: 2rem;
+}
 
-/* Cake CSS (Simplified Pro) */
-.cake { position: relative; width: 200px; }
-.layer { height: 40px; width: 100%; border-radius: 10px; margin-bottom: 2px; }
-.layer-bottom { background: #4e342e; }
-.layer-middle { background: #6d4c41; }
-.layer-top { background: #8d6e63; }
-.candle { 
-    width: 10px; height: 40px; background: gold; 
-    position: absolute; top: -40px; left: 50%; transform: translateX(-50%);
-    cursor: pointer;
+/* Magnetic Button */
+.magnetic-wrap { display: inline-block; padding: 2rem; }
+.magnetic-btn {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 1.5rem 3rem;
+    border-radius: 50px;
+    font-family: 'Manrope', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.9rem;
+    position: relative;
+    overflow: hidden;
+    transition: border 0.3s;
 }
-.flame { 
-    width: 15px; height: 20px; background: orange; 
-    border-radius: 50% 50% 20% 20%; position: absolute; top: -25px;
-    animation: flicker 0.1s infinite alternate;
+.magnetic-btn:hover { border-color: white; }
+
+/* Minimalist Cake */
+.minimal-cake { position: relative; width: 100px; height: 150px; margin-bottom: 3rem; cursor: pointer; }
+.cake-base { position: absolute; bottom: 0; width: 100%; height: 60px; background: #222; border-radius: 4px; }
+.candle-stick { position: absolute; bottom: 60px; left: 48%; width: 4%; height: 40px; background: #555; }
+.flame {
+    position: absolute; bottom: 105px; left: 40%;
+    width: 20%; height: 30px; background: #e0d0a6;
+    border-radius: 50% 50% 20% 20%;
+    box-shadow: 0 0 20px #e0d0a6;
+    animation: flicker 2s infinite alternate ease-in-out;
 }
-@keyframes flicker { from { opacity: 0.8; } to { opacity: 1; } }
+
+@keyframes flicker {
+    0% { transform: scale(1) rotate(-2deg); opacity: 0.9; }
+    100% { transform: scale(1.1) rotate(2deg); opacity: 1; }
+}
+
+.hidden-text { opacity: 0; transform: translateY(30px); }
+.mt-2 { margin-top: 2rem; }
