@@ -1,59 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Goodbye</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Goodbye</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#050816,#111827,#1f2937);
+    color:white;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    text-align:center;
+}
+
+.stars{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background-image:
+        radial-gradient(white 1px, transparent 1px);
+    background-size:40px 40px;
+    opacity:.25;
+    animation:moveStars 80s linear infinite;
+}
+
+.container{
+    position:relative;
+    z-index:2;
+    max-width:850px;
+    padding:30px;
+    animation:fade 2s ease;
+}
+
+h1{
+    font-size:70px;
+    margin-bottom:20px;
+    letter-spacing:4px;
+}
+
+#typing{
+    color:#00ffd5;
+    font-size:28px;
+    min-height:40px;
+    margin-bottom:40px;
+}
+
+p{
+    font-size:22px;
+    line-height:1.8;
+    margin:20px 0;
+    opacity:0;
+    animation:appear 1s forwards;
+}
+
+p:nth-child(3){animation-delay:2s;}
+p:nth-child(4){animation-delay:4s;}
+p:nth-child(5){animation-delay:6s;}
+p:nth-child(6){animation-delay:8s;}
+p:nth-child(7){animation-delay:10s;}
+
+.last{
+    margin-top:40px;
+    font-size:32px;
+    color:#7fffd4;
+    font-weight:bold;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes appear{
+    to{
+        opacity:1;
+    }
+}
+
+@keyframes moveStars{
+    from{
+        background-position:0 0;
+    }
+    to{
+        background-position:0 1000px;
+    }
+}
+
+@media(max-width:768px){
+
+h1{
+    font-size:45px;
+}
+
+#typing{
+    font-size:22px;
+}
+
+p{
+    font-size:18px;
+}
+
+.last{
+    font-size:24px;
+}
+
+}
+</style>
+
 </head>
+
 <body>
 
 <div class="stars"></div>
 
 <div class="container">
 
-    <h1 class="title">Goodbye 👋</h1>
+<h1>GOODBYE 👋</h1>
 
-    <h2 id="typing"></h2>
+<div id="typing"></div>
 
-    <div class="message">
-        <p>
-            Every ending becomes the beginning of a new journey.
-        </p>
+<p>Every ending is the beginning of a new journey.</p>
 
-        <p>
-            Thank you for every smile, every conversation,
-            every laugh, every lesson, and every unforgettable memory.
-        </p>
+<p>Thank you for every smile, every laugh, every conversation, and every unforgettable memory.</p>
 
-        <p>
-            Time may take us to different places,
-            but the moments we shared will always remain close to my heart.
-        </p>
+<p>Life may take us on different paths, but the memories we've created together will stay forever.</p>
 
-        <p>
-            Distance may separate us,
-            but memories never fade.
-        </p>
+<p>May your future be filled with happiness, success, peace, and endless opportunities.</p>
 
-        <p>
-            I sincerely wish you happiness,
-            success,
-            good health,
-            and a beautiful future.
-        </p>
+<p>Distance may separate us, but true memories never fade.</p>
 
-        <p class="last">
-            This isn't forever...
-            It's simply
-            <br><br>
-            <span>See You Again ❤️</span>
-        </p>
-    </div>
+<p class="last">❤️ This is not Goodbye... It's See You Again ❤️</p>
 
 </div>
 
-<script src="script.js"></script>
+<script>
+
+const message="Some people become memories... but the best memories last forever.";
+
+let i=0;
+
+function type(){
+
+if(i<message.length){
+
+document.getElementById("typing").innerHTML+=message.charAt(i);
+
+i++;
+
+setTimeout(type,60);
+
+}
+
+}
+
+type();
+
+</script>
 
 </body>
 </html>
