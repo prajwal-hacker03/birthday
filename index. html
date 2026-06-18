@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goodbye</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="stars"></div>
+
+<div class="container">
+
+    <h1 class="title">Goodbye 👋</h1>
+
+    <h2 id="typing"></h2>
+
+    <div class="message">
+        <p>
+            Every ending becomes the beginning of a new journey.
+        </p>
+
+        <p>
+            Thank you for every smile, every conversation,
+            every laugh, every lesson, and every unforgettable memory.
+        </p>
+
+        <p>
+            Time may take us to different places,
+            but the moments we shared will always remain close to my heart.
+        </p>
+
+        <p>
+            Distance may separate us,
+            but memories never fade.
+        </p>
+
+        <p>
+            I sincerely wish you happiness,
+            success,
+            good health,
+            and a beautiful future.
+        </p>
+
+        <p class="last">
+            This isn't forever...
+            It's simply
+            <br><br>
+            <span>See You Again ❤️</span>
+        </p>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
