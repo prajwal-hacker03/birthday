@@ -1,20 +1,29 @@
-const text =
-"Some people become memories... but the best memories never leave.";
+// Typing Effect
+const text = "Some people become memories... but the best memories stay forever. ❤️";
 
-let i = 0;
+let index = 0;
 
-function type() {
-
-    if(i < text.length){
-
-        document.getElementById("typing").innerHTML += text.charAt(i);
-
-        i++;
-
-        setTimeout(type,60);
-
+function typeWriter() {
+    if (index < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeWriter, 60);
     }
-
 }
 
-type();
+// Start typing when the page loads
+window.onload = function () {
+    typeWriter();
+};
+
+// Optional: Fade in all paragraphs one by one
+const paragraphs = document.querySelectorAll("p");
+
+paragraphs.forEach((p, i) => {
+    p.style.opacity = "0";
+
+    setTimeout(() => {
+        p.style.transition = "opacity 1s ease";
+        p.style.opacity = "1";
+    }, (i + 1) * 1500);
+});
