@@ -1,141 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Dr. Spoorthi ❤️</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Good Bye</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(270deg, #ff6ec4, #7873f5, #4ade80);
+      background-size: 600% 600%;
+      animation: backgroundShift 10s ease infinite;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
 
-    <link rel="stylesheet" href="style.css">
+    h1 {
+      font-size: 5em;
+      background: linear-gradient(90deg, #fff, #ffeb3b, #ff9800);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(255,255,255,0.3);
+      opacity: 0;
+      transform: translateY(50px);
+      animation: fadeSlideIn 3s forwards;
+    }
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    @keyframes fadeSlideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes backgroundShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Fade out after 6s */
+    h1.fadeOut {
+      animation: fadeOut 2s forwards;
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <h1 id="message">Good Bye...</h1>
 
-    <!-- Floating Hearts -->
-    <div id="hearts-container"></div>
-
-    <!-- Hero Section -->
-    <section class="hero">
-
-        <div class="hero-content">
-
-            <h1 class="title">
-                Happy Birthday
-            </h1>
-
-            <h2 class="name">
-                Dr. Spoorthi ❤️
-            </h2>
-
-            <p class="subtitle">
-                You are the most beautiful chapter of my life ✨
-            </p>
-
-            <button class="btn" onclick="showSurprise()">
-                Open Your Surprise 🎁
-            </button>
-
-        </div>
-
-    </section>
-
-    <!-- Surprise Section -->
-    <section id="surprise-section" class="hidden">
-
-        <div class="card">
-
-            <h2>My Princess ❤️</h2>
-
-            <p>
-                Happy Birthday to the most special person in my life.
-                Every moment with you is precious and unforgettable.
-                May your life be filled with happiness, success,
-                love, laughter and beautiful memories.
-            </p>
-
-            <div class="gift-box" onclick="openGift()">
-
-                <div class="gift-lid"></div>
-
-                <div class="gift-body"></div>
-
-            </div>
-
-            <div id="gift-content" class="hidden">
-
-                <h3>Your Gifts 🎁</h3>
-
-                <div class="gift-items">
-
-                    <span>💎 Earrings</span>
-                    <span>✨ Bracelet</span>
-                    <span>🌹 Roses</span>
-                    <span>🎂 Birthday Cake</span>
-                    <span>❤️ Endless Love</span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- Love Letter -->
-    <section class="letter-section">
-
-        <div class="letter-card">
-
-            <h2>💌 A Letter For You</h2>
-
-            <p id="typewriter"></p>
-
-        </div>
-
-    </section>
-
-    <!-- Gallery -->
-    <section class="gallery">
-
-        <h2>Beautiful Memories 📸</h2>
-
-        <div class="gallery-grid">
-
-            <div class="photo">Photo 1</div>
-            <div class="photo">Photo 2</div>
-            <div class="photo">Photo 3</div>
-            <div class="photo">Photo 4</div>
-
-        </div>
-
-    </section>
-
-    <!-- Final Message -->
-    <section class="final-section">
-
-        <h2>
-            You Are My Greatest Gift ❤️
-        </h2>
-
-        <p>
-            Happy Birthday Dr. Spoorthi ❤️
-            <br>
-            Forever & Always
-        </p>
-
-    </section>
-
-    <!-- Music -->
-    <audio id="music" loop>
-        <source src="music.mp3" type="audio/mpeg">
-    </audio>
-
-    <button id="musicBtn" onclick="toggleMusic()">
-        🎵 Play Music
-    </button>
-
-    <script src="script.js"></script>
-
+  <script>
+    // Trigger fade out after 6 seconds
+    setTimeout(() => {
+      document.getElementById("message").classList.add("fadeOut");
+    }, 6000);
+  </script>
 </body>
 </html>
