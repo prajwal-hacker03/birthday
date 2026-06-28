@@ -1,30 +1,49 @@
 document.addEventListener("DOMContentLoaded", () => {
     const cloudsContainer = document.getElementById("clouds");
-    const cloudCount = 8; // Adjust for more or fewer clouds
+    const cloudCount = 6; // Number of clouds you want on screen
 
     for (let i = 0; i < cloudCount; i++) {
-        createCloud(cloudsContainer);
+        createCloud(cloudsContainer, true); // 'true' means they start scattered randomly across the screen
     }
+
+    // Continuously spawn a new cloud off-screen every few seconds to keep the flow going
+    setInterval(() => {
+        createCloud(cloudsContainer, false); // 'false' means they start strictly from the left edge
+    }, 12000);
 });
 
-function createCloud(container) {
+function createCloud(container, isInitialSpawn) {
     const cloud = document.createElement("div");
     cloud.classList.add("cloud");
 
-    // Randomize cloud dimensions
-    const width = Math.random() * 150 + 100; 
-    const height = width * 0.4;
+    // Randomize cloud sizes
+    const width = Math.random() * 180 + 120; // Width between 120px and 300px
+    const height = width * 0.35;
     
-    // Randomize positions and speed
-    const topPosition = Math.random() * 60; // Keep them in the upper sky
-    const duration = Math.random() * 50 + 40; // Speed of drift (seconds)
-    const delay = Math.random() * -60; // Negative delay so some clouds start mid-screen
+    // Randomize vertical position (keeping them in the upper sky area)
+    const topPosition = Math.random() * 45; 
+    
+    // Randomize speed (between 50 and 90 seconds to cross the screen)
+    const duration = Math.random() * 40 + 50; 
 
     cloud.style.width = `${width}px`;
     cloud.style.height = `${height}px`;
     cloud.style.top = `${topPosition}%`;
     cloud.style.animationDuration = `${duration}s`;
-    cloud.style.animationDelay = `${delay}s`;
+
+    if (isInitialSpawn) {
+        // Distribute them across the screen when the page first loads
+        const randomStart = Math.random() * -100; // Negative delay simulates they've been moving for a while
+        cloud.style.animationDelay = `${randomStart}s`;
+    } else {
+        // Freshly spawned clouds start fresh from the left
+        cloud.style.animationDelay = `0s`;
+    }
+
+    // Clean up clouds after they finish moving to prevent lag
+    setTimeout(() => {
+        cloud.remove();
+    }, duration * 1000);
 
     container.appendChild(cloud);
 }
